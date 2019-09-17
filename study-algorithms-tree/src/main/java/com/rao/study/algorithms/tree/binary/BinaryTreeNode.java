@@ -1,9 +1,11 @@
-package com.rao.study.algorithms.tree;
+package com.rao.study.algorithms.tree.binary;
+
+import com.rao.study.algorithms.tree.Node;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TreeNode {
+public class BinaryTreeNode {
 
     public static void main(String[] args){
 
