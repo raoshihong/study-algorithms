@@ -215,8 +215,6 @@ public class RedBlackTree {
                 } else {
                     p.getParent().setLeftChild(x);
                 }
-                x.setRightChild(p.getRightChild());
-                x.setLeftChild(p.getLeftChild());
                 //清除p节点
                 p.setParent(null);
                 p.setRightChild(null);
@@ -365,10 +363,10 @@ public class RedBlackTree {
                                 //对父节点进行左旋
                                 root = rotateLeft(xp);
 
-                                //左旋完后,得到的情况是x节点为黑色,兄弟节点颜色任意,此时就需要重新对整棵树进行平衡处理
-                                //这种情况表示已经达到了平衡,所以把x设置为root
-                                x = root;
                             }
+
+                            //这种情况表示已经达到了平衡,所以把x设置为root
+                            x = root;
 
                         }
 
@@ -395,17 +393,25 @@ public class RedBlackTree {
                         if (!isRed(s.getLeftChild()) && !isRed(s.getRightChild())) {
                             s.setRed(true);
                             x = xp;//x上升
-                        } else if (isRed(s.getLeftChild())) {
-                            //兄弟节点的左节点为红色,右节点颜色任意
-                            s.setRed(xp.isRed());
-                            xp.setRed(false);
-                            s.getLeftChild().setRed(false);
-                            root = rotateRight(xp);
-                        } else if (isRed(s.getRightChild())) {
-                            //兄弟节点的右节点为红色,左节点为黑色
-                            s.setRed(true);
-                            s.getRightChild().setRed(false);
-                            root = rotateLeft(xp);
+                        } else {
+
+                            if (isRed(s.getRightChild())) {
+                                //兄弟节点的右节点为红色,左节点为黑色
+                                s.setRed(true);
+                                s.getRightChild().setRed(false);
+                                root = rotateLeft(xp);
+                            }
+
+                            if (isRed(s.getLeftChild())) {
+                                //兄弟节点的左节点为红色,右节点颜色任意
+                                s.setRed(xp.isRed());
+                                xp.setRed(false);
+                                s.getLeftChild().setRed(false);
+                                root = rotateRight(xp);
+                            }
+
+                            x = root;
+
                         }
                     }else{
                         //兄弟节点为红色

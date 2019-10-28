@@ -16,13 +16,14 @@ public class RedBlackTest {
         //30,15,45,7,23,35,50,3,10,2
         //26,17,41,14,21,30,47,10,16,19,23,28,38,7,12,15,20,35,39,3
         //26,20,41,14,21,30,47,10,16,19,23,28,38,7,12,15,35,39,3
-        RedBlackTree redBlackTree = generator(Arrays.asList(30,20,35,36));
+        RedBlackTree redBlackTree = generator(Arrays.asList(30,20,35,12,25,22,24,23));
 
         redBlackTree.mid(redBlackTree.getRoot());
 
         System.out.println("删除节点");
         System.out.println("根节点:"+redBlackTree.getRoot().getData());
-        redBlackTree.remove(20);
+        redBlackTree.remove(30);
+        System.out.println("删除后的根节点:"+(redBlackTree.getRoot()==null?"":redBlackTree.getRoot().getData()));
         redBlackTree.mid(redBlackTree.getRoot());
     }
 
